@@ -100,8 +100,8 @@
 #        --mail-type flag.  You MUST set your mail address using --mail-user
 #        for messages to get off the cluster.
 #
-#SBATCH --mail-user='mmgee@udel.edu'
-#SBATCH --mail-type=ALL
+# SBATCH --mail-user=xx@xxx.edu'
+# SBATCH --mail-type=ALL
 #
 # [EDIT] By default we DO NOT want to send the job submission environment
 #        to the compute node when the job runs.
