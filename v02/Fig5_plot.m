@@ -8,7 +8,7 @@ Params = [2.798268 49.889025 20.086178 6.873361 0.993574 2.431832 284.973370 3.7
 
 %% Base model
 % create simulation input object
-mdlName = 'ICN_with_BR_input_model4test_clusterParams_ICNtune_v13_RA';
+mdlName = 'ICN_with_BR_input_model4test_clusterParams_ICNtune_v13';
 simIn = Simulink.SimulationInput(mdlName);
 simIn = simIn.setBlockParameter([mdlName '/Autonomic Nervous System/ICN/PN-NA/minval_NA_PN'], 'Value', num2str(Params(1)), ...
     [mdlName '/Autonomic Nervous System/ICN/PN-NA/fmax_NA_PN'], 'Value', num2str(Params(2)), ... %output is the fmax value 
@@ -32,7 +32,7 @@ simOut = sim(simIn);
 % create simulation input object
 ParamsNLR = Params;
 ParamsNLR(14) = 0;
-mdlName = 'ICN_with_BR_input_model4test_clusterParams_ICNtune_v13_NLR_RA';
+mdlName = 'ICN_with_BR_input_model4test_clusterParams_ICNtune_v13_NLR';
 simInNLR = Simulink.SimulationInput(mdlName);
 simInNLR = simInNLR.setBlockParameter([mdlName '/Autonomic Nervous System/ICN/PN-NA/minval_NA_PN'], 'Value', num2str(ParamsNLR(1)), ...        
     [mdlName '/Autonomic Nervous System/ICN/PN-NA/fmax_NA_PN'], 'Value', num2str(ParamsNLR(2)), ... 
@@ -194,7 +194,7 @@ saveas(gcf,'Fig5_plot_ICNff.png')
 %% subpanel 2: zoomed in 
 fs = 18;
 plotlim = [165 180];
-yax = [1.75 4.75];
+yax = [2.5 4.75];
 figure(1)
 
 % PN_NA output ff
@@ -215,7 +215,7 @@ hold on
 plot(simOutNLR.time(tplotIdxNLR),simOutNLR.PN_DMV_ff(tplotIdxNLR),'r-','LineWidth',2)
 xlabel('Time (s)','FontSize',18)
 ylabel({'Firing'; 'Frequency'},'FontSize',18)
-ylim(yax)
+% ylim(yax)
 xlim(plotlim)
 
 % Format and save plot
