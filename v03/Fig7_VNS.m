@@ -168,12 +168,12 @@ HRrecovSim = (recovHR - baseHR) / baseHR
 % simulink model
 
 % afferent only stimulation
-stimAff = 0.0297;
-recovAff = 0.0072;
+stimAff = 0.0179;
+recovAff = 0.0071;
 
 % 1 Hz efferent and 1 Hz afferent stimulation
-stimBoth = 0.1298;
-recovBoth = 0.0323;
+stimBoth = 0.1351;
+recovBoth = 0.0086;
 
 % plot formatting
 fs = 18;
@@ -237,7 +237,7 @@ RRtimes = locs - 3052.2;
 RRtimes(end) = [];
 
 %% Save output for different conditions
-% filename = 'Both1Hz.mat'; %'AfferentOnly.mat'
+% filename = 'AfferentOnly.mat';%'Both1Hz.mat'; %
 % save(filename,'RRintervalPlotPer','timePlot')
 
 %% plotting
