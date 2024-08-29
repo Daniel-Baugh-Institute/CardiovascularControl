@@ -289,7 +289,7 @@ rng default
 % set(gca, 'FontSize', 16);
 %% postIR regression
 sigIdx = [1 2 3 4 5 7 8 9 11 16 20 23 27 28 30 31 32 36 39 40 42 45 46 47 48 49 50 51];
-parameters = [paramsTemp_NTS; paramsTemp_ICN; paramsTemp_all; paramsTemp_BR; paramsTemp_cardiac; paramsTemp_NADMV];
+% parameters = [paramsTemp_NTS; paramsTemp_ICN; paramsTemp_all; paramsTemp_BR; paramsTemp_cardiac; paramsTemp_NADMV];
 % parameters = [paramsTemp_NTS(:,sigIdx); paramsTemp_ICN(:,sigIdx); paramsTemp_all(:,sigIdx); paramsTemp_BR(:,sigIdx); paramsTemp_cardiac(:,sigIdx); paramsTemp_NADMV(:,sigIdx)];
 % HRbase_postIR = [HRstore_NTS'; HRstore_ICN'; HRstore_all'; HRstore_BR'; HRstore_cardiac'; HRstore_NADMV'];
 % % crit = [crit_NTS; crit_ICN; crit_all; crit_BR; crit_cardiac; crit_NADMV];

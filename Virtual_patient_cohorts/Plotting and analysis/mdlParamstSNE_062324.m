@@ -433,6 +433,60 @@ for i = 1:numClusters
     end
 end
 
+%% Plot comparison of baroreceptor responsivity curves for pre and postIR
+% post IR
+postIR_mean = mean(parameters(:,51));
+postIR_std = std(parameters(:,51));
+postIR_lb = postIR_mean - postIR_std;
+postIR_ub = postIR_mean + postIR_std;
+
+% Load preIR data
+load 'FilteredDistributionIdx_061824.mat' % variables: sampleSet, idxStore
+preIR_accepted = sampleSet(idxStore,51);
+preIR_mean = mean(preIR_accepted);
+preIR_std = std(preIR_accepted);
+preIR_lb = preIR_mean - preIR_std;
+preIR_ub = preIR_mean + preIR_std;
+
+fmin = 2.52; % Hz
+fmax = 47.78; % Hz
+p_prime = 60:1:120;
+pn = 92; % mmHg
+
+% Calc preIR baroreceptor response curve
+fbr_mean_pre = (fmin+fmax.*exp((p_prime-pn)./preIR_mean))./(1+exp((p_prime-pn)/preIR_mean));
+fbr_lower_pre = (fmin+fmax.*exp((p_prime-pn)./preIR_lb))./(1+exp((p_prime-pn)/preIR_lb));
+fbr_upper_pre = (fmin+fmax.*exp((p_prime-pn)./preIR_ub))./(1+exp((p_prime-pn)/preIR_ub));
+
+% Calc postIR baroreceptor response curve
+fbr_mean_post = (fmin+fmax.*exp((p_prime-pn)./postIR_mean))./(1+exp((p_prime-pn)/postIR_mean));
+fbr_lower_post = (fmin+fmax.*exp((p_prime-pn)./postIR_lb))./(1+exp((p_prime-pn)/postIR_lb));
+fbr_upper_post = (fmin+fmax.*exp((p_prime-pn)./postIR_ub))./(1+exp((p_prime-pn)/postIR_ub));
+
+
+% Plot preIR baroreceptor response curve
+figure;
+hold on;
+
+% Shaded area for preIR standard deviation
+fill([p_prime, fliplr(p_prime)], [fbr_lower_pre, fliplr(fbr_upper_pre)], 'b', 'FaceAlpha', 0.3, 'EdgeColor', 'none','HandleVisibility','off');
+
+% Mean line for preIR
+plot(p_prime, fbr_mean_pre, 'b-', 'LineWidth', 2, 'DisplayName', 'Pre-IR');
+
+% Shaded area for postIR standard deviation
+fill([p_prime, fliplr(p_prime)], [fbr_lower_post, fliplr(fbr_upper_post)],[0.9290 0.6940 0.1250], 'FaceAlpha', 0.3, 'EdgeColor', 'none','HandleVisibility','off');
+
+% Mean line for postIR
+plot(p_prime, fbr_mean_post, '-','color',[0.9290 0.6940 0.1250], 'LineWidth', 2, 'DisplayName', 'Post-IR');
+
+% Customize plot
+xlabel('Arterial pressure (mm Hg)', 'FontSize', 14);
+ylabel('Firing rate (Hz)', 'FontSize', 14);
+legend('Location', 'Best');
+set(gca, 'FontSize', 14);
+grid on;
+hold off;
 %% plot baroreflex curves from group 4 (low vagal activity, med BRS) to show
 % that vagal stim can improve BRS and that BR stimulation does not improve
 % BRS
