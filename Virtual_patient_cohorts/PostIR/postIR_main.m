@@ -5,7 +5,7 @@ addpath(genpath('C:\Users\mmgee\AppData\Local\Temp\Mxt231\RemoteFiles'))
 addpath(genpath('/lustre/ogunnaike/users/2420/matlab_example/matlab_slurm/ACC2024-02-02-2024/'))
 addpath('/lustre/ogunnaike/users/2420/matlab_example/matlab_slurm/UnitTests/')
 addpath('/lustre/ogunnaike/users/2420/matlab_example/matlab_slurm/Mastitskaya2012/')
-cd ..
+% cd ..
 my_dir = pwd;
 addpath(genpath(my_dir))
 %% Set up parallel pool
@@ -52,7 +52,7 @@ hold off;
 %% change these liens
 % load PI individual parameters
 % matFilename = [filename 'FilteredDistribution.mat'];
-date = '06182024';
+date = '06232024';
 load('FilteredDistribution_061824.mat')
 matFilename = 'FilteredDistributionIdx_061824.mat';
 load(matFilename) % gives 'idxStore','sampleSet'
@@ -72,15 +72,15 @@ numPatients = length(idxStore);
 
 %% change this line
 % countTotal = 0;
-% BPvalues = -70:10:90; % neck chamber pressure
-% zeroIdx = find(BPvalues == 0);
+BPvalues = -70:10:90; % neck chamber pressure
+zeroIdx = find(BPvalues == 0);
 % 
 % mdlName     = 'ICN_model_v15_Mastitskaya2012_control_r2020b';
 % % idxFail = 212;%[1 2 3 4 5 6 7 73 100 107 134 138 150 167];
 % for i = 30:40%numPatients
 % 
 %     parameters = sampleSet(idxStore(i),:);
-%     numSampleSets = 100;
+    numSampleSets = 100;
 %     variationFactor = 1.5;
 %     mdlAlternative = 1;
 %     filename = ['postIR_cardiac_' date '_' num2str(i)];
@@ -121,53 +121,53 @@ numPatients = length(idxStore);
 % end
 
 matFilename = ['postIR_cardiac_' date '.mat'];
-% load(matFilename)
+load(matFilename)
 % save(matFilename, 'postIRstore') % postIR_idx is model sub idx for accepted postIR models
 
 %% Unpack postIR models to plot HRMAP bar plot
 % indices of non-empty fields
-% indices_i = [];
-% indices_j = [];
-% preIR_MAP_models = [];
-% preIR_HR_models = [];
-% postIR_HR_models = [];
-% postIR_MAP_models = [];
-% preIR_idx = [];
-% reps = zeros(1,numPatients);
-% 
-% % Loop through struct array
-% for i = 1:numPatients % preIR idx loop
-%     indices_j = [];
-%     for j = 1:numSampleSets % postIR idx loop
-%     % Check if systolic pressure is in range
-%         if postIRstore(i).crit(j,1) == 1
-%             % Check HR
-%             if postIRstore(i).crit(j,2) == 1
-%                 % Check MAP decrease
-%                 % if postIRstore(i).crit(j,3) == 1
-%                     % Check HR within 20% change
-%                     % if postIRstore(i).crit(j,4) == 1
-%                         indices_i = [indices_i, i];
-%                         indices_j = [indices_j, j]; 
-%                         postIR_HR_models = [postIR_HR_models postIRstore(i).HR(j)];
-%                         postIR_MAP_models = [postIR_MAP_models postIRstore(i).MAP(j)];
-%                     % end
-%                 % end
-%             end
-%         end
-%     end
-%     reps(i) = length(indices_j); % number of accepted postIR mdoels per preIR model
-%     preIR_idx = [preIR_idx i];
-% end
-% 
-% 
-% for i = 1:numPatients
-%     preIR_HR_models = [preIR_HR_models repmat(HR_preIR(idxStore(preIR_idx(i)),zeroIdx),1,reps(i))];
-%     preIR_MAP_models = [preIR_MAP_models repmat(MAP(idxStore(preIR_idx(i)),zeroIdx),1,reps(i))];
-% end
-% 
-% altMdlName = 'cardiac';
-% Mastitskaya_plot_bar_HRMAP(preIR_MAP_models, postIR_MAP_models, preIR_HR_models, postIR_HR_models,altMdlName)
+indices_i = [];
+indices_j = [];
+preIR_MAP_models = [];
+preIR_HR_models = [];
+postIR_HR_models = [];
+postIR_MAP_models = [];
+preIR_idx = [];
+reps = zeros(1,numPatients);
+
+% Loop through struct array
+for i = 1:numPatients % preIR idx loop
+    indices_j = [];
+    for j = 1:numSampleSets % postIR idx loop
+    % Check if systolic pressure is in range
+        if postIRstore(i).crit(j,1) == 1
+            % Check HR
+            if postIRstore(i).crit(j,2) == 1
+                % Check MAP decrease
+                % if postIRstore(i).crit(j,3) == 1
+                    % Check HR within 20% change
+                    % if postIRstore(i).crit(j,4) == 1
+                        indices_i = [indices_i, i];
+                        indices_j = [indices_j, j]; 
+                        postIR_HR_models = [postIR_HR_models postIRstore(i).HR(j)];
+                        postIR_MAP_models = [postIR_MAP_models postIRstore(i).MAP(j)];
+                    % end
+                % end
+            end
+        end
+    end
+    reps(i) = length(indices_j); % number of accepted postIR mdoels per preIR model
+    preIR_idx = [preIR_idx i];
+end
+
+
+for i = 1:numPatients
+    preIR_HR_models = [preIR_HR_models repmat(HR_preIR(idxStore(preIR_idx(i)),zeroIdx),1,reps(i))];
+    preIR_MAP_models = [preIR_MAP_models repmat(MAP(idxStore(preIR_idx(i)),zeroIdx),1,reps(i))];
+end
+
+altMdlName = 'cardiac';
+Mastitskaya_plot_bar_HRMAP(preIR_MAP_models, postIR_MAP_models, preIR_HR_models, postIR_HR_models,altMdlName)
 
 %% tSNE of crit matrix
 % color by preIR model?-- yes to tell us which individuals can and can't
@@ -226,7 +226,7 @@ green = [0.4660 0.6740 0.1880];
 lightblue = [0.3010 0.7450 0.9330];
 mdlcolor = {purple,green,'m',lightblue,goldenrod,'c'};
 
-postIRbarocurve_filename = 'postIR_baroreceptor_06182024';
+postIRbarocurve_filename = 'postIR_cardiac_06182024';
 postIRstore_filename = 'postIR_cardiac_06182024.mat';
 BPvalues = -70:10:90;
 brown = [196/255 153/255 124/255];

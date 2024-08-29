@@ -26,174 +26,174 @@ load 'FilteredDistributionIdx_061824.mat'
 numPatients = length(idxStore);
 numSamples = 100;
 
-% load postIR data
-paramsTemp_BR = [];
-HRstore_BR = [];
-COstore_BR = [];
-crit_BR = [];
-A2_BR = [];
-NA_BR = [];
-DMV_BR = [];
-symp_BR = [];
-preIRmdl_BR = [];
-BR_idx=[];
-
-paramsTemp_ICN = [];
-HRstore_ICN = [];
-COstore_ICN = [];
-crit_ICN = [];
-A2_ICN = [];
-NA_ICN = [];
-DMV_ICN = [];
-symp_ICN = [];
-preIRmdl_ICN = [];
-ICN_idx=[];
-
-paramsTemp_cardiac = [];
-HRstore_cardiac = [];
-COstore_cardiac = [];
-crit_cardiac = [];
-A2_cardiac = [];
-NA_cardiac = [];
-DMV_cardiac = [];
-symp_cardiac = [];
-preIRmdl_cardiac = [];
-cardiac_idx=[];
-
-paramsTemp_NADMV = [];
-HRstore_NADMV = [];
-COstore_NADMV = [];
-crit_NADMV = [];
-A2_NADMV = [];
-NA_NADMV = [];
-DMV_NADMV = [];
-symp_NADMV = [];
-preIRmdl_NADMV = [];
-NADMV_idx=[];
-
-paramsTemp_NTS = [];
-HRstore_NTS = [];
-COstore_NTS = [];
-crit_NTS = [];
-A2_NTS = [];
-NA_NTS = [];
-DMV_NTS = [];
-symp_NTS = [];
-preIRmdl_NTS = [];
-NTS_idx=[];
-
-paramsTemp_all = [];
-HRstore_all = [];
-COstore_all = [];
-crit_all = [];
-A2_all = [];
-NA_all = [];
-DMV_all = [];
-symp_all = [];
-preIRmdl_all = [];
-all_idx=[];
-
-
-for i = 1:numPatients
-    for j = 1:numSamples
-        load 'postIR_baroreceptors_06232024.mat'
-        if postIRstore(i).crit(j,1) == 1 && postIRstore(i).crit(j,2) == 1 && postIRstore(i).crit(j,6) == 1
-            paramsTemp_BR = [paramsTemp_BR; postIRstore(i).params(j,:)];
-            HRstore_BR = [HRstore_BR postIRstore(i).HR(j)];
-            COstore_BR = [COstore_BR postIRstore(i).CO(j)];
-            crit_BR = [crit_BR postIRstore(i).crit(j,6)];
-            A2_BR = [A2_BR postIRstore(i).Avals(j,2)];
-            NA_BR = [NA_BR postIRstore(i).NA(j)];
-            DMV_BR = [DMV_BR postIRstore(i).DMV(j)];
-            symp_BR = [symp_BR postIRstore(i).symp(j)];
-            preIRmdl_BR = [preIRmdl_BR i];
-            BR_idx=[BR_idx j];
-        end
-
-
-        load 'postIR_cardiac_06232024.mat'
-        if postIRstore(i).crit(j,1) == 1 && postIRstore(i).crit(j,2) == 1 && postIRstore(i).crit(j,6) == 1
-            paramsTemp_cardiac = [paramsTemp_cardiac; postIRstore(i).params(j,:)];
-            HRstore_cardiac = [HRstore_cardiac postIRstore(i).HR(j)];
-            COstore_cardiac = [COstore_cardiac postIRstore(i).CO(j)];
-            crit_cardiac = [crit_cardiac postIRstore(i).crit(j,6)];
-            A2_cardiac = [A2_cardiac postIRstore(i).Avals(j,2)];
-            NA_cardiac = [NA_cardiac postIRstore(i).NA(j)];
-            DMV_cardiac = [DMV_cardiac postIRstore(i).DMV(j)];
-            symp_cardiac = [symp_cardiac postIRstore(i).symp(j)];
-            preIRmdl_cardiac = [preIRmdl_cardiac i];
-            cardiac_idx=[cardiac_idx j];
-        end
-
-
-        load 'postIR_NADMV_06232024.mat'
-        if postIRstore(i).crit(j,1) == 1 && postIRstore(i).crit(j,2) == 1 && postIRstore(i).crit(j,6) == 1
-            paramsTemp_NADMV = [paramsTemp_NADMV; postIRstore(i).params(j,:)];
-            HRstore_NADMV = [HRstore_NADMV postIRstore(i).HR(j)];
-            COstore_NADMV = [COstore_NADMV postIRstore(i).CO(j)];
-            crit_NADMV = [crit_NADMV postIRstore(i).crit(j,6)];
-            A2_NADMV = [A2_NADMV postIRstore(i).Avals(j,2)];
-            NA_NADMV = [NA_NADMV postIRstore(i).NA(j)];
-            DMV_NADMV = [DMV_NADMV postIRstore(i).DMV(j)];
-            symp_NADMV = [symp_NADMV postIRstore(i).symp(j)];
-            preIRmdl_NADMV = [preIRmdl_NADMV i];
-            NADMV_idx=[NADMV_idx j];
-        end
-
-
-        load 'postIR_NTS_06232024.mat'
-        if postIRstore(i).crit(j,1) == 1 && postIRstore(i).crit(j,2) == 1 && postIRstore(i).crit(j,6) == 1
-            paramsTemp_NTS = [paramsTemp_NTS; postIRstore(i).params(j,:)];
-            HRstore_NTS = [HRstore_NTS postIRstore(i).HR(j)];
-            COstore_NTS = [COstore_NTS postIRstore(i).CO(j)];
-            crit_NTS = [crit_NTS postIRstore(i).crit(j,6)];
-            A2_NTS = [A2_NTS postIRstore(i).Avals(j,2)];
-            NA_NTS = [NA_NTS postIRstore(i).NA(j)];
-            DMV_NTS = [DMV_NTS postIRstore(i).DMV(j)];
-            symp_NTS = [symp_NTS postIRstore(i).symp(j)];
-            preIRmdl_NTS = [preIRmdl_NTS i];
-            NTS_idx=[NTS_idx j];
-        end
-
-
-        load 'postIR_ICN_06232024.mat'
-        if postIRstore(i).crit(j,1) == 1 && postIRstore(i).crit(j,2) == 1 && postIRstore(i).crit(j,6) == 1
-            paramsTemp_ICN = [paramsTemp_ICN; postIRstore(i).params(j,:)];
-            HRstore_ICN = [HRstore_ICN postIRstore(i).HR(j)];
-            COstore_ICN = [COstore_ICN postIRstore(i).CO(j)];
-            crit_ICN = [crit_ICN postIRstore(i).crit(j,6)];
-            A2_ICN = [A2_ICN postIRstore(i).Avals(j,2)];
-            NA_ICN = [NA_ICN postIRstore(i).NA(j)];
-            DMV_ICN = [DMV_ICN postIRstore(i).DMV(j)];
-            symp_ICN = [symp_ICN postIRstore(i).symp(j)];
-            preIRmdl_ICN = [preIRmdl_ICN i];
-            ICN_idx=[ICN_idx j];
-        end
-
-
-        load 'postIR_all_06232024.mat'
-        if postIRstore(i).crit(j,1) == 1 && postIRstore(i).crit(j,2) == 1 && postIRstore(i).crit(j,6) == 1
-            paramsTemp_all = [paramsTemp_all; postIRstore(i).params(j,:)];
-            HRstore_all = [HRstore_all postIRstore(i).HR(j)];
-            COstore_all = [COstore_all postIRstore(i).CO(j)];
-            crit_all = [crit_all postIRstore(i).crit(j,6)];
-            A2_all = [A2_all postIRstore(i).Avals(j,2)];
-            NA_all = [NA_all postIRstore(i).NA(j)];
-            DMV_all = [DMV_all postIRstore(i).DMV(j)];
-            symp_all = [symp_all postIRstore(i).symp(j)];
-            preIRmdl_all = [preIRmdl_all i];
-            all_idx=[all_idx j];
-        end
-    end
-end
-
-disp('HR store size')
-size(HRstore_NTS)
-size(HRstore_BR)
-size(HRstore_cardiac)
-size(HRstore_ICN)
-size(HRstore_NADMV)
-size(HRstore_all)
+% % load postIR data
+% paramsTemp_BR = [];
+% HRstore_BR = [];
+% COstore_BR = [];
+% crit_BR = [];
+% A2_BR = [];
+% NA_BR = [];
+% DMV_BR = [];
+% symp_BR = [];
+% preIRmdl_BR = [];
+% BR_idx=[];
+% 
+% paramsTemp_ICN = [];
+% HRstore_ICN = [];
+% COstore_ICN = [];
+% crit_ICN = [];
+% A2_ICN = [];
+% NA_ICN = [];
+% DMV_ICN = [];
+% symp_ICN = [];
+% preIRmdl_ICN = [];
+% ICN_idx=[];
+% 
+% paramsTemp_cardiac = [];
+% HRstore_cardiac = [];
+% COstore_cardiac = [];
+% crit_cardiac = [];
+% A2_cardiac = [];
+% NA_cardiac = [];
+% DMV_cardiac = [];
+% symp_cardiac = [];
+% preIRmdl_cardiac = [];
+% cardiac_idx=[];
+% 
+% paramsTemp_NADMV = [];
+% HRstore_NADMV = [];
+% COstore_NADMV = [];
+% crit_NADMV = [];
+% A2_NADMV = [];
+% NA_NADMV = [];
+% DMV_NADMV = [];
+% symp_NADMV = [];
+% preIRmdl_NADMV = [];
+% NADMV_idx=[];
+% 
+% paramsTemp_NTS = [];
+% HRstore_NTS = [];
+% COstore_NTS = [];
+% crit_NTS = [];
+% A2_NTS = [];
+% NA_NTS = [];
+% DMV_NTS = [];
+% symp_NTS = [];
+% preIRmdl_NTS = [];
+% NTS_idx=[];
+% 
+% paramsTemp_all = [];
+% HRstore_all = [];
+% COstore_all = [];
+% crit_all = [];
+% A2_all = [];
+% NA_all = [];
+% DMV_all = [];
+% symp_all = [];
+% preIRmdl_all = [];
+% all_idx=[];
+% 
+% 
+% for i = 1:numPatients
+%     for j = 1:numSamples
+%         load 'postIR_baroreceptors_06232024.mat'
+%         if postIRstore(i).crit(j,1) == 1 && postIRstore(i).crit(j,2) == 1 && postIRstore(i).crit(j,6) == 1
+%             paramsTemp_BR = [paramsTemp_BR; postIRstore(i).params(j,:)];
+%             HRstore_BR = [HRstore_BR postIRstore(i).HR(j)];
+%             COstore_BR = [COstore_BR postIRstore(i).CO(j)];
+%             crit_BR = [crit_BR postIRstore(i).crit(j,6)];
+%             A2_BR = [A2_BR postIRstore(i).Avals(j,2)];
+%             NA_BR = [NA_BR postIRstore(i).NA(j)];
+%             DMV_BR = [DMV_BR postIRstore(i).DMV(j)];
+%             symp_BR = [symp_BR postIRstore(i).symp(j)];
+%             preIRmdl_BR = [preIRmdl_BR i];
+%             BR_idx=[BR_idx j];
+%         end
+% 
+% 
+%         load 'postIR_cardiac_06232024.mat'
+%         if postIRstore(i).crit(j,1) == 1 && postIRstore(i).crit(j,2) == 1 && postIRstore(i).crit(j,6) == 1
+%             paramsTemp_cardiac = [paramsTemp_cardiac; postIRstore(i).params(j,:)];
+%             HRstore_cardiac = [HRstore_cardiac postIRstore(i).HR(j)];
+%             COstore_cardiac = [COstore_cardiac postIRstore(i).CO(j)];
+%             crit_cardiac = [crit_cardiac postIRstore(i).crit(j,6)];
+%             A2_cardiac = [A2_cardiac postIRstore(i).Avals(j,2)];
+%             NA_cardiac = [NA_cardiac postIRstore(i).NA(j)];
+%             DMV_cardiac = [DMV_cardiac postIRstore(i).DMV(j)];
+%             symp_cardiac = [symp_cardiac postIRstore(i).symp(j)];
+%             preIRmdl_cardiac = [preIRmdl_cardiac i];
+%             cardiac_idx=[cardiac_idx j];
+%         end
+% 
+% 
+%         load 'postIR_NADMV_06232024.mat'
+%         if postIRstore(i).crit(j,1) == 1 && postIRstore(i).crit(j,2) == 1 && postIRstore(i).crit(j,6) == 1
+%             paramsTemp_NADMV = [paramsTemp_NADMV; postIRstore(i).params(j,:)];
+%             HRstore_NADMV = [HRstore_NADMV postIRstore(i).HR(j)];
+%             COstore_NADMV = [COstore_NADMV postIRstore(i).CO(j)];
+%             crit_NADMV = [crit_NADMV postIRstore(i).crit(j,6)];
+%             A2_NADMV = [A2_NADMV postIRstore(i).Avals(j,2)];
+%             NA_NADMV = [NA_NADMV postIRstore(i).NA(j)];
+%             DMV_NADMV = [DMV_NADMV postIRstore(i).DMV(j)];
+%             symp_NADMV = [symp_NADMV postIRstore(i).symp(j)];
+%             preIRmdl_NADMV = [preIRmdl_NADMV i];
+%             NADMV_idx=[NADMV_idx j];
+%         end
+% 
+% 
+%         load 'postIR_NTS_06232024.mat'
+%         if postIRstore(i).crit(j,1) == 1 && postIRstore(i).crit(j,2) == 1 && postIRstore(i).crit(j,6) == 1
+%             paramsTemp_NTS = [paramsTemp_NTS; postIRstore(i).params(j,:)];
+%             HRstore_NTS = [HRstore_NTS postIRstore(i).HR(j)];
+%             COstore_NTS = [COstore_NTS postIRstore(i).CO(j)];
+%             crit_NTS = [crit_NTS postIRstore(i).crit(j,6)];
+%             A2_NTS = [A2_NTS postIRstore(i).Avals(j,2)];
+%             NA_NTS = [NA_NTS postIRstore(i).NA(j)];
+%             DMV_NTS = [DMV_NTS postIRstore(i).DMV(j)];
+%             symp_NTS = [symp_NTS postIRstore(i).symp(j)];
+%             preIRmdl_NTS = [preIRmdl_NTS i];
+%             NTS_idx=[NTS_idx j];
+%         end
+% 
+% 
+%         load 'postIR_ICN_06232024.mat'
+%         if postIRstore(i).crit(j,1) == 1 && postIRstore(i).crit(j,2) == 1 && postIRstore(i).crit(j,6) == 1
+%             paramsTemp_ICN = [paramsTemp_ICN; postIRstore(i).params(j,:)];
+%             HRstore_ICN = [HRstore_ICN postIRstore(i).HR(j)];
+%             COstore_ICN = [COstore_ICN postIRstore(i).CO(j)];
+%             crit_ICN = [crit_ICN postIRstore(i).crit(j,6)];
+%             A2_ICN = [A2_ICN postIRstore(i).Avals(j,2)];
+%             NA_ICN = [NA_ICN postIRstore(i).NA(j)];
+%             DMV_ICN = [DMV_ICN postIRstore(i).DMV(j)];
+%             symp_ICN = [symp_ICN postIRstore(i).symp(j)];
+%             preIRmdl_ICN = [preIRmdl_ICN i];
+%             ICN_idx=[ICN_idx j];
+%         end
+% 
+% 
+%         load 'postIR_all_06232024.mat'
+%         if postIRstore(i).crit(j,1) == 1 && postIRstore(i).crit(j,2) == 1 && postIRstore(i).crit(j,6) == 1
+%             paramsTemp_all = [paramsTemp_all; postIRstore(i).params(j,:)];
+%             HRstore_all = [HRstore_all postIRstore(i).HR(j)];
+%             COstore_all = [COstore_all postIRstore(i).CO(j)];
+%             crit_all = [crit_all postIRstore(i).crit(j,6)];
+%             A2_all = [A2_all postIRstore(i).Avals(j,2)];
+%             NA_all = [NA_all postIRstore(i).NA(j)];
+%             DMV_all = [DMV_all postIRstore(i).DMV(j)];
+%             symp_all = [symp_all postIRstore(i).symp(j)];
+%             preIRmdl_all = [preIRmdl_all i];
+%             all_idx=[all_idx j];
+%         end
+%     end
+% end
+% 
+% disp('HR store size')
+% size(HRstore_NTS)
+% size(HRstore_BR)
+% size(HRstore_cardiac)
+% size(HRstore_ICN)
+% size(HRstore_NADMV)
+% size(HRstore_all)
 rng default
 
 
@@ -387,150 +387,150 @@ parameters = [paramsTemp_NTS; paramsTemp_ICN; paramsTemp_all; paramsTemp_BR; par
 
 %% Plot
 % boxplot
-% load 'central_peripheral.mat'
-% ratio_combined = [ratio_peri_cent, ratio_peri_cent_post];
-% figure;
-% boxplot(ratio_combined,'Labels',{'Pre-I/R','Post-I/R'})
-% hold on
-% plot([0 4],[1 1],'k--')
-% ylabel('Peripheral/central contribution to heart rate');
-% ylim([0 10])
-% set(gca, 'FontSize', 16);
-% set(gcf, 'Position',[10 10 400 500])
-% saveas(gcf,'ratio_central_peripheral_063024.png')
-% 
-% % swarmchart
-% x = [ones(1,length(ratio_peri_cent)); 2*ones(1,length(ratio_peri_cent_post))]';
-% figure;
-% swarmchart(x,ratio_combined)
-% hold on
-% plot([0.5 2.5],[1 1],'k--')
-% ylabel('Peripheral/central contribution to heart rate');
-% % ylim([0 2.5])
-% set(gca, 'FontSize', 16);
-% set(gcf, 'Position',[10 10 400 500])
-% saveas(gcf,'ratio_central_peripheral_swarm_063024.png')
-% 
-% % t-test
-% x = ratio_combined(:,1);
-% y = ratio_combined(:,2);
-% h = ttest(x,y,"Tail","both","Alpha",0.05)
-% disp('if h=0, no evidence of observed effect')
-% 
-% %%
-% % Assuming ratio_combined is a matrix where each row is a pair (before, after)
-% ratios = ratio_combined(:, 1) ./ ratio_combined(:, 2);
-% 
-% % Perform a one-sample t-test to see if the mean of ratios is different from 1
-% [h, p, ci, stats] = ttest(ratios, 1, 'Tail', 'both', 'Alpha', 0.05);
-% 
-% disp('if h=0, no evidence of observed effect');
-% disp(['h = ', num2str(h)]);
-% disp(['p-value = ', num2str(p)]);
-% disp(['Confidence interval = ', num2str(ci')]);
-% disp(['t-statistic = ', num2str(stats.tstat)]);
+load 'central_peripheral.mat'
+ratio_combined = [ratio_peri_cent, ratio_peri_cent_post];
+figure;
+boxplot(ratio_combined,'Labels',{'Pre-I/R','Post-I/R'})
+hold on
+plot([0 4],[1 1],'k--')
+ylabel('Peripheral/central contribution to heart rate');
+ylim([0 10])
+set(gca, 'FontSize', 16);
+set(gcf, 'Position',[10 10 400 500])
+saveas(gcf,'ratio_central_peripheral_063024.png')
+
+% swarmchart
+x = [ones(1,length(ratio_peri_cent)); 2*ones(1,length(ratio_peri_cent_post))]';
+figure;
+swarmchart(x,ratio_combined)
+hold on
+plot([0.5 2.5],[1 1],'k--')
+ylabel('Peripheral/central contribution to heart rate');
+% ylim([0 2.5])
+set(gca, 'FontSize', 16);
+set(gcf, 'Position',[10 10 400 500])
+saveas(gcf,'ratio_central_peripheral_swarm_063024.png')
+
+% t-test
+x = ratio_combined(:,1);
+y = ratio_combined(:,2);
+h = ttest(x,y,"Tail","both","Alpha",0.05)
+disp('if h=0, no evidence of observed effect')
+
+%%
+% Assuming ratio_combined is a matrix where each row is a pair (before, after)
+ratios = ratio_combined(:, 1) ./ ratio_combined(:, 2);
+
+% Perform a one-sample t-test to see if the mean of ratios is different from 1
+[h, p, ci, stats] = ttest(ratios, 1, 'Tail', 'both', 'Alpha', 0.05);
+
+disp('if h=0, no evidence of observed effect');
+disp(['h = ', num2str(h)]);
+disp(['p-value = ', num2str(p)]);
+disp(['Confidence interval = ', num2str(ci')]);
+disp(['t-statistic = ', num2str(stats.tstat)]);
 
 %% Plot BRS vs Shap value
 % addpath 'C:\Users\mmgee\Box\Michelle-Gee\Research\MI model'
-A2_combined_raw = [A2_NTS, A2_ICN, A2_all, A2_BR, A2_cardiac, A2_NADMV];
-A2_combined = -abs(A2_combined_raw);
-
-NAactivity_combined = [NA_NTS, NA_ICN, NA_all, NA_BR, NA_cardiac, NA_NADMV];
-DMVactivity_combined = [DMV_NTS, DMV_ICN, DMV_all, DMV_BR, DMV_cardiac, DMV_NADMV];
-COstore_combined = [COstore_NTS, COstore_ICN, COstore_all, COstore_BR, COstore_cardiac, COstore_NADMV];
-HRstore_combined = [HRstore_NTS, HRstore_ICN, HRstore_all, HRstore_BR, HRstore_cardiac, HRstore_NADMV];
-symp_combined = [symp_NTS, symp_ICN, symp_all, symp_BR, symp_cardiac, symp_NADMV];
-preIRmdl_combined = [preIRmdl_NTS, preIRmdl_ICN, preIRmdl_all, preIRmdl_BR, preIRmdl_cardiac, preIRmdl_NADMV];
-idx_combined =  [NTS_idx, ICN_idx, all_idx, BR_idx, cardiac_idx, NADMV_idx];
-% save('comb_postIR_accepted.mat','NAactivity_combined','DMVactivity_combined',"symp_combined",'A2_combined','COstore_combined','HRstore_combined','parameters','preIRmdl_combined','idx_combined')
-load 'central_peripheral.mat'
-load 'comb_postIR_accepted.mat'
-load 'FilteredDistribution_061824.mat'
-load 'FilteredDistributionIdx_061824.mat'
-
-figure;
-plot(abs(A2_combined),ratio_peri_cent_post,'ro')
-hold on
-plot(abs(A2Store(idxStore)),ratio_peri_cent(1:59),'bo')
-xlabel('Baroreflex slope')
-ylabel('Avg Shapley value')
-set(gca,'FontSize',14)
-saveas(gcf,'BRSvsShap.fig')
-hold off;
-
-figure;
-hist(A2_combined)
-saveas(gcf,'A2_hist.fig')
-
-% BRS correlated to NA activity, DMV activity, symp activity, baroreceptor
-% activity
-figure;
-plot(A2_combined,NAactivity_combined,'o')
-xlabel('Baroreflex slope')
-ylabel('NA activity')
-set(gca,'FontSize',14)
-saveas(gcf,'BRSvsNA.fig')
-
-figure;
-plot(A2_combined,DMVactivity_combined,'o')
-xlabel('Baroreflex slope')
-ylabel('DMV activity')
-set(gca,'FontSize',14)
-saveas(gcf,'BRSvsDMV.fig')
-
-figure;
-plot(A2_combined,symp_combined,'o')
-xlabel('Baroreflex slope')
-ylabel('Symp')
-set(gca,'FontSize',14)
-saveas(gcf,'BRSvsSymp.fig')
-
-%% tsne
-rng default
-load 'neural_act_070424.mat'
-Xdata = [DMVactivity_combined', NAactivity_combined', LSactivity,CPactivity,BRactivity];% , parameters(:,end),NTSactivity,  COstore_combined', ratio_peri_cent_post,symp_combined', sympActivity,
-Xdata_clean = Xdata;
-% Find rows with NaN values
-nanRows = any(isnan(Xdata), 2);
-
-% Get the indices of those rows
-nanIndices = find(nanRows);
-
-A2_clean = A2_combined;
-A2_clean(:,nanIndices) = [];
-Xdata_clean(nanIndices,:) = [];
-
-% for i = 5:5:50
- i = 15;
-% perplexity = 15 seems to be best looking, but all look pretty similar
-y = tsne(Xdata,"Algorithm",'barneshut','Standardize',true,'Perplexity',i);
-
-% Check t-SNE output dimensions
-if size(y, 2) ~= 2
-    error('t-SNE output dimensions are incorrect');
-end
-
-% Set colorData from A2_combined, ensuring dimensions match
-colorData = abs(A2_clean(:)); % Ensure colorData is a column vector
-
-% Check if colorData matches the number of samples
-if size(colorData, 1) ~= size(Xdata_clean, 1)
-    error('Number of samples in colorData does not match Xdata');
-end
-
-% Plotting
-figure;
-a = scatter(y(:, 1), y(:, 2), 15, colorData, 'filled'); % 15 is the marker size
-colormap jet;  % Choose a colormap
-colorbar;  
-
-% Set axis labels and title for better visualization
-xlabel('t-SNE Dimension 1');
-ylabel('t-SNE Dimension 2');
-set(gca,'FontSize',16)
-% title(num2str(i))
-saveas(gcf, 'tsne_coloredBRS_noBR_070524.png')
-save('tsne_coloredBRS_noBR_070524.mat','y')
+% A2_combined_raw = [A2_NTS, A2_ICN, A2_all, A2_BR, A2_cardiac, A2_NADMV];
+% A2_combined = -abs(A2_combined_raw);
+% 
+% NAactivity_combined = [NA_NTS, NA_ICN, NA_all, NA_BR, NA_cardiac, NA_NADMV];
+% DMVactivity_combined = [DMV_NTS, DMV_ICN, DMV_all, DMV_BR, DMV_cardiac, DMV_NADMV];
+% COstore_combined = [COstore_NTS, COstore_ICN, COstore_all, COstore_BR, COstore_cardiac, COstore_NADMV];
+% HRstore_combined = [HRstore_NTS, HRstore_ICN, HRstore_all, HRstore_BR, HRstore_cardiac, HRstore_NADMV];
+% symp_combined = [symp_NTS, symp_ICN, symp_all, symp_BR, symp_cardiac, symp_NADMV];
+% preIRmdl_combined = [preIRmdl_NTS, preIRmdl_ICN, preIRmdl_all, preIRmdl_BR, preIRmdl_cardiac, preIRmdl_NADMV];
+% idx_combined =  [NTS_idx, ICN_idx, all_idx, BR_idx, cardiac_idx, NADMV_idx];
+% % save('comb_postIR_accepted.mat','NAactivity_combined','DMVactivity_combined',"symp_combined",'A2_combined','COstore_combined','HRstore_combined','parameters','preIRmdl_combined','idx_combined')
+% load 'central_peripheral.mat'
+% load 'comb_postIR_accepted.mat'
+% load 'FilteredDistribution_061824.mat'
+% load 'FilteredDistributionIdx_061824.mat'
+% 
+% figure;
+% plot(abs(A2_combined),ratio_peri_cent_post,'ro')
+% hold on
+% plot(abs(A2Store(idxStore)),ratio_peri_cent(1:59),'bo')
+% xlabel('Baroreflex slope')
+% ylabel('Avg Shapley value')
+% set(gca,'FontSize',14)
+% saveas(gcf,'BRSvsShap.fig')
+% hold off;
+% 
+% figure;
+% hist(A2_combined)
+% saveas(gcf,'A2_hist.fig')
+% 
+% % BRS correlated to NA activity, DMV activity, symp activity, baroreceptor
+% % activity
+% figure;
+% plot(A2_combined,NAactivity_combined,'o')
+% xlabel('Baroreflex slope')
+% ylabel('NA activity')
+% set(gca,'FontSize',14)
+% saveas(gcf,'BRSvsNA.fig')
+% 
+% figure;
+% plot(A2_combined,DMVactivity_combined,'o')
+% xlabel('Baroreflex slope')
+% ylabel('DMV activity')
+% set(gca,'FontSize',14)
+% saveas(gcf,'BRSvsDMV.fig')
+% 
+% figure;
+% plot(A2_combined,symp_combined,'o')
+% xlabel('Baroreflex slope')
+% ylabel('Symp')
+% set(gca,'FontSize',14)
+% saveas(gcf,'BRSvsSymp.fig')
+% 
+% %% tsne
+% rng default
+% load 'neural_act_070424.mat'
+% Xdata = [DMVactivity_combined', NAactivity_combined', LSactivity,CPactivity,BRactivity];% , parameters(:,end),NTSactivity,  COstore_combined', ratio_peri_cent_post,symp_combined', sympActivity,
+% Xdata_clean = Xdata;
+% % Find rows with NaN values
+% nanRows = any(isnan(Xdata), 2);
+% 
+% % Get the indices of those rows
+% nanIndices = find(nanRows);
+% 
+% A2_clean = A2_combined;
+% A2_clean(:,nanIndices) = [];
+% Xdata_clean(nanIndices,:) = [];
+% 
+% % for i = 5:5:50
+%  i = 15;
+% % perplexity = 15 seems to be best looking, but all look pretty similar
+% y = tsne(Xdata,"Algorithm",'barneshut','Standardize',true,'Perplexity',i);
+% 
+% % Check t-SNE output dimensions
+% if size(y, 2) ~= 2
+%     error('t-SNE output dimensions are incorrect');
 % end
+% 
+% % Set colorData from A2_combined, ensuring dimensions match
+% colorData = abs(A2_clean(:)); % Ensure colorData is a column vector
+% 
+% % Check if colorData matches the number of samples
+% if size(colorData, 1) ~= size(Xdata_clean, 1)
+%     error('Number of samples in colorData does not match Xdata');
+% end
+% 
+% % Plotting
+% figure;
+% a = scatter(y(:, 1), y(:, 2), 15, colorData, 'filled'); % 15 is the marker size
+% colormap jet;  % Choose a colormap
+% colorbar;  
+% 
+% % Set axis labels and title for better visualization
+% xlabel('t-SNE Dimension 1');
+% ylabel('t-SNE Dimension 2');
+% set(gca,'FontSize',16)
+% % title(num2str(i))
+% saveas(gcf, 'tsne_coloredBRS_noBR_070524.png')
+% save('tsne_coloredBRS_noBR_070524.mat','y')
+% % end
 
 

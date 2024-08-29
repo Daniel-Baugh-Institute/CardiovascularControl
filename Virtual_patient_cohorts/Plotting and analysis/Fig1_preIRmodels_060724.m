@@ -218,7 +218,7 @@ end
 % load 'sprenkle.mat'
 % plot(sprenkle(:,1),sprenkle(:,2),'ko','MarkerSize',ms,'MarkerFaceColor',color(i,:),'HandleVisibility','off')
 
-ylim([0 4])%([0.6 1.2])
+ylim([0.6 1.2])%([0 4])%
 xlabel('Estimated carotid sinus pressure (mm Hg)')
 ylabel('RR interval (s)') %
 legend('Individual 1','Individual 2','Individual 3','Individual 4','Individual 5','Location','northeast') % 'Individual 6',
@@ -245,7 +245,7 @@ end
 %     plot(ECSP(idxStore(hasPostIRmdl(i)),:),RR_plot(idxStore(hasPostIRmdl(i)),:),'LineWidth',lw/4,'Color','r')
 % end
 
-ylim([0 4])%([0.6 1.2])
+ylim([0.6 1.2])%([0 4])%
 xlabel('Estimated carotid sinus pressure (mm Hg)')
 ylabel('RR interval (s)') %
 legend('Individual parameter set','Location','northeast') % 'No post-IR model','Post-IR model',

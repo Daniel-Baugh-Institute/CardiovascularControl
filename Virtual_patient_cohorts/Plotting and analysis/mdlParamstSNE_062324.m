@@ -22,8 +22,8 @@ addpath(genpath(my_dir))
 % postIR BRS
 
 %% Filter for postIR mdoels that meet quantitative data
-% load 'FilteredDistributionIdx_061824.mat' % variables: sampleSet, idxStore
-% numPatients = length(idxStore);
+load 'FilteredDistributionIdx_061824.mat' % variables: sampleSet, idxStore
+numPatients = length(idxStore);
 % BPvalues = -70:10:90; % neck chamber pressure
 % zeroIdx = find(BPvalues == 0);
 % altMdlName = {'cardiac', 'baroreceptors', 'NTS', 'NADMV', 'ICN', 'all'};
@@ -113,7 +113,7 @@ addpath(genpath(my_dir))
 % % preIR: 3 clusters for 5, 2 for 15-20
 % % but not separated by BRS
 % % 45 for mixed pre and post IR
-% Y = tsne(Xdata(558+1-numPatients:end,1:6),'Algorithm','barneshut','Distance','cityblock','Perplexity',perplexity,'Standardize',1); 
+% Y = tsne(Xdata([558+1-numPatients:end],1:6),'Algorithm','barneshut','Distance','cityblock','Perplexity',perplexity,'Standardize',1); 
 % %  preIR: ; postIR: 1:558-numPatients 
 % % perplexity = 25;
 % % Y25 = tsne(Xdata,'Algorithm','barneshut','Distance','cityblock','Perplexity',perplexity,'Standardize',1);
@@ -246,12 +246,27 @@ addpath(genpath(my_dir))
 % saveas(gcf,filename)
 % end
 
-%% plot by coloration of preIR model 
-% High BRS patient #'s: 4, 30, 41, 46, 23 
+%% plot by BRS
 load 'neural_act_070424.mat'
 load 'central_peripheral.mat'
 load 'comb_postIR_accepted.mat'
+load tsne_coloredBRS_allvars_070524.mat
+load 'comb_postIR_accepted.mat'
  numPatients = 59;
+
+ figure;
+ colorData = abs(A2_combined');
+ scatter(y(:,1),y(:,2),10,colorData,'filled');
+ colormap(jet)
+ colorbar('southoutside');
+ xlabel('t-SNE Dimension 1')
+ylabel('t-SNE Dimension 2')
+ set(gca,'FontSize',24)
+ set(gcf,'Position',[10 10 500 700])%[10 10 1250 900])
+
+%% plot by coloration of preIR model 
+% High BRS patient #'s: 4, 30, 41, 46, 23 
+
 
 labels = repmat({'0'},499,1);
 for i = 1:numPatients
@@ -261,8 +276,7 @@ for i = 1:numPatients
 end
 
 % labels(nanIndices) = [];
-load tsne_coloredBRS_allvars_070524.mat
-load 'comb_postIR_accepted.mat'
+
 figure;
 a = gscatter(y(:,1),y(:,2),labels);%,clr,sym,siz);
 
@@ -422,45 +436,45 @@ end
 %% plot baroreflex curves from group 4 (low vagal activity, med BRS) to show
 % that vagal stim can improve BRS and that BR stimulation does not improve
 % BRS
-mdlName = 'ICN_model_v15_Mastitskaya2012_control_r2020b';
-BPvalues = 0;%[-70.0	-50.0	-25.0	0.0	8.0	13.2	18.5	23.7	30.0	37.5	50.0	75.0	90.0]; % neck chamber pressure
-
-
-% choose random parameter set from group
-rng(73) % seed 12345
-rand_mdl = randi(91,1); %215 for grp 4
-mdl_parameters = parameters(idx(2).grp_idx(1:91),:);
-%435 is an NADMV model
-
-for i = 1:91
-    filename = ['highVagal_lowBRS_grp_VNS_10Hz_' num2str(i)];
-%ICN
-ICNparams = mdl_parameters(i,1:17);
-
-% NA
-NAparams = mdl_parameters(i,30:41);
-
-% NTS
-NTSparams = mdl_parameters(i,18:29);
-
-% heart
-heart_params = mdl_parameters(i,[42,45:50]);
-
-% BR
-ka = mdl_parameters(i,51);
-
-baseline = 1; % calculate hemodynamic and neural metrics
-
-
-
-[mat_filename, HRvalidation, MAP_EI_mdl, SP_store, DP_store, CO_store, ...
-    NA_activity_postIR, DMV_activity_postIR, symp_activity_postIR, ...
-    SDRR_store, RMSSD_store, pNN50_store] = baroreflex_curve(mdlName, ...
-    BPvalues,filename,ICNparams,NAparams,NTSparams,heart_params,ka,baseline);
-
-HR_10Hz(i) = HRvalidation;
-end
-save('HR_highVagal_lowBRS_grp_VNS_10Hz.mat',"HR_10Hz")
+% mdlName = 'ICN_model_v15_Mastitskaya2012_control_r2020b';
+% BPvalues = 0;%[-70.0	-50.0	-25.0	0.0	8.0	13.2	18.5	23.7	30.0	37.5	50.0	75.0	90.0]; % neck chamber pressure
+% 
+% 
+% % choose random parameter set from group
+% rng(73) % seed 12345
+% rand_mdl = randi(91,1); %215 for grp 4
+% mdl_parameters = parameters(idx(2).grp_idx(1:91),:);
+% %435 is an NADMV model
+% 
+% for i = 1:91
+%     filename = ['highVagal_lowBRS_grp_VNS_10Hz_' num2str(i)];
+% %ICN
+% ICNparams = mdl_parameters(i,1:17);
+% 
+% % NA
+% NAparams = mdl_parameters(i,30:41);
+% 
+% % NTS
+% NTSparams = mdl_parameters(i,18:29);
+% 
+% % heart
+% heart_params = mdl_parameters(i,[42,45:50]);
+% 
+% % BR
+% ka = mdl_parameters(i,51);
+% 
+% baseline = 1; % calculate hemodynamic and neural metrics
+% 
+% 
+% 
+% [mat_filename, HRvalidation, MAP_EI_mdl, SP_store, DP_store, CO_store, ...
+%     NA_activity_postIR, DMV_activity_postIR, symp_activity_postIR, ...
+%     SDRR_store, RMSSD_store, pNN50_store] = baroreflex_curve(mdlName, ...
+%     BPvalues,filename,ICNparams,NAparams,NTSparams,heart_params,ka,baseline);
+% 
+% HR_10Hz(i) = HRvalidation;
+% end
+% save('HR_highVagal_lowBRS_grp_VNS_10Hz.mat',"HR_10Hz")
 %%
 % load 'highVagal_lowBRS_VNS_10Hz_seed73.mat'
 % load 'lowVagal_medBRS_VNS_4Hz.mat'
