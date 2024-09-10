@@ -5,7 +5,7 @@
 
 # Reproducing the figures
 
-# Fig 3A and B: preIR_main.m
+# Fig 3A and B: Fig3_preIRmodels_060724.m
 # Fig 3C: preIR_boxplots.m
 
 # Fig 4C, D, E: postIR_main.m

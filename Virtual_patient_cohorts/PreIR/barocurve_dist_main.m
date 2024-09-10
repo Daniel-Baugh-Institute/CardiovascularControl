@@ -8,11 +8,11 @@ myPool = parpool(myCluster, myCluster.NumWorkers);
 %% Add file paths
 my_dir = pwd;
 addpath(genpath(my_dir))
-addpath 'C:\Users\mmgee\Box\Michelle-Gee\Research\MI model'
-addpath(genpath('C:\Users\mmgee\AppData\Local\Temp\Mxt231\RemoteFiles'))
-addpath(genpath('/lustre/ogunnaike/users/2420/matlab_example/matlab_slurm/ACC2024-02-02-2024/'))
-addpath('/lustre/ogunnaike/users/2420/matlab_example/matlab_slurm/UnitTests/')
-addpath('/lustre/ogunnaike/users/2420/matlab_example/matlab_slurm/Mastitskaya2012/')
+% addpath 'C:\Users\mmgee\Box\Michelle-Gee\Research\MI model'
+% addpath(genpath('C:\Users\mmgee\AppData\Local\Temp\Mxt231\RemoteFiles'))
+% addpath(genpath('/lustre/ogunnaike/users/2420/matlab_example/matlab_slurm/ACC2024-02-02-2024/'))
+% addpath('/lustre/ogunnaike/users/2420/matlab_example/matlab_slurm/UnitTests/')
+% addpath('/lustre/ogunnaike/users/2420/matlab_example/matlab_slurm/Mastitskaya2012/')
 
 %% Main
 % control PI parameters
