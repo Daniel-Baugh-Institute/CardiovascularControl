@@ -5,7 +5,8 @@
 
 # Reproducing the figures
 
-# Fig 3A and B: Fig3_preIRmodels_060724.m
+# Fig 3A: in command line run plot_PAWN_scatter('PAWN_MAP_20240510.mat','PAWN_HR_20240510.mat','sensitivity_analysis.png'). Note that the PAWN toolbox (https://safetoolbox.github.io/Pawn.html) must be downloaded to run the full sensitivity analysis code using PAWN_MI_051024.m. 
+# Fig 3B and C: Fig3_preIRmodels_060724.m
 # Fig 3C: preIR_boxplots.m
 
 # Fig 4C, D, E: postIR_main.m

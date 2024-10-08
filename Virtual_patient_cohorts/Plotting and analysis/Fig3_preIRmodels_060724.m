@@ -34,8 +34,9 @@ i = 1;
 % ylim([0.6 1.2])
 xlabel('Estimated carotid sinus pressure (mm Hg)')
 ylabel('RR interval (s)') %
-legend('Individual parameter set','Location','northeast') % 'No post-IR model','Post-IR model',
+legend('Individual parameter set','Location','south') % 'No post-IR model','Post-IR model',
 set(gca,'FontSize',fs)
+set(gcf,'Position',[10,10,500,625])
 hold off
 saveas(gcf,'UnfilteredPreIRModels.png')
 
@@ -221,12 +222,13 @@ end
 ylim([0.6 1.2])%([0 4])%
 xlabel('Estimated carotid sinus pressure (mm Hg)')
 ylabel('RR interval (s)') %
-legend('Individual 1','Individual 2','Individual 3','Individual 4','Individual 5','Location','northeast') % 'Individual 6',
-% ttl = title('A');
-% ttl.Units = 'Normalize';
-% ttl.Position(1) = -0.15; % use negative values (ie, -0.1) to move further left
-% ttl.HorizontalAlignment = 'left';
+% legend('Individual 1','Individual 2','Individual 3','Individual 4','Individual 5','Location','northeast') % 'Individual 6',
+ttl = title('B  Individual data from Seredynski et al.');
+ttl.Units = 'Normalize';
+ttl.Position(1) = -0.15; % use negative values (ie, -0.1) to move further left
+ttl.HorizontalAlignment = 'left';
 set(gca,'FontSize',fs)
+set(gcf,'Position',[10,10,520,625])
 hold off
 saveas(gcf,'SeredynskiData.png')
 
@@ -248,12 +250,14 @@ end
 ylim([0.6 1.2])%([0 4])%
 xlabel('Estimated carotid sinus pressure (mm Hg)')
 ylabel('RR interval (s)') %
-legend('Individual parameter set','Location','northeast') % 'No post-IR model','Post-IR model',
-% ttl = title('B');
-% ttl.Units = 'Normalize';
-% ttl.Position(1) = -0.15; % use negative values (ie, -0.1) to move further left
-% ttl.HorizontalAlignment = 'left';
+% legend('Individual parameter set','Location','northeast') % 'No post-IR model','Post-IR model',
+ttl = title('C    In silico patient baroreflex curves');
+ttl.Units = 'Normalize';
+ttl.Position(1) = -0.15; % use negative values (ie, -0.1) to move further left
+ttl.HorizontalAlignment = 'left';
+xlim([0 200])
 set(gca,'FontSize',fs)
+set(gcf,'Position',[10,10,520,625])
 hold off
 saveas(gcf,'AcceptedPreIRModels.png')
 
