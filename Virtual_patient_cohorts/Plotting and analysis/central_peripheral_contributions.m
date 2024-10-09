@@ -411,11 +411,15 @@ set(gca, 'FontSize', 16);
 set(gcf, 'Position',[10 10 400 500])
 saveas(gcf,'ratio_central_peripheral_swarm_063024.png')
 
-% t-test
+% t-test to see if ratios are different from each other
 x = ratio_combined(:,1);
 y = ratio_combined(:,2);
-h = ttest(x,y,"Tail","both","Alpha",0.05)
+[h, p, ci, stats] = ttest(x,y,"Tail","both","Alpha",0.05);
 disp('if h=0, no evidence of observed effect')
+disp(['h = ', num2str(h)]);
+disp(['p-value = ', num2str(p)]);
+disp(['Confidence interval = ', num2str(ci')]);
+disp(['t-statistic = ', num2str(stats.tstat)]);
 
 %%
 % Assuming ratio_combined is a matrix where each row is a pair (before, after)
@@ -424,11 +428,11 @@ ratios = ratio_combined(:, 1) ./ ratio_combined(:, 2);
 % Perform a one-sample t-test to see if the mean of ratios is different from 1
 [h, p, ci, stats] = ttest(ratios, 1, 'Tail', 'both', 'Alpha', 0.05);
 
-disp('if h=0, no evidence of observed effect');
-disp(['h = ', num2str(h)]);
-disp(['p-value = ', num2str(p)]);
-disp(['Confidence interval = ', num2str(ci')]);
-disp(['t-statistic = ', num2str(stats.tstat)]);
+% disp('if h=0, no evidence of observed effect');
+% disp(['h = ', num2str(h)]);
+% disp(['p-value = ', num2str(p)]);
+% disp(['Confidence interval = ', num2str(ci')]);
+% disp(['t-statistic = ', num2str(stats.tstat)]);
 
 %% Plot BRS vs Shap value
 % addpath 'C:\Users\mmgee\Box\Michelle-Gee\Research\MI model'
